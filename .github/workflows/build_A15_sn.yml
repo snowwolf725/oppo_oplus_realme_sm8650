@@ -121,8 +121,8 @@ jobs:
             patch -p1 -F 3 < lz4kd.patch || true
           fi
           
-       - name: Apply Docker and LXC patch
-         run: |
+      - name: Apply Docker and LXC patch
+        run: |
           git clone https://github.com/snowwolf725/GKI-LXC.git
           cd kernel_workspace/common
           git apply ../../GKI-LXC/patchs/common-01.patch
