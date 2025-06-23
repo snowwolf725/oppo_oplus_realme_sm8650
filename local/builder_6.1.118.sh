@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
 # ===== 设置自定义参数 =====
-echo "===== 欧加真SM8650通用A15 OKI内核本地编译脚本 By Coolapk@cctv18 ====="
+echo "===== 欧加真SM8650通用6.1.118 A15 OKI内核本地编译脚本 By Coolapk@cctv18 ====="
 echo ">>> 读取用户配置..."
 SOC_BRANCH=${SOC_BRANCH:-sm8650}
 MANIFEST=${MANIFEST:-oppo+oplus+realme}
@@ -15,8 +15,8 @@ CUSTOM_SUFFIX=${CUSTOM_SUFFIX:-android14-11-o-gca13bffobf09}
 USE_PATCH_LINUX=${USE_PATCH_LINUX:-y}
 read -p "是否应用 lz4kd 补丁？(y/n，默认：y): " APPLY_LZ4KD
 APPLY_LZ4KD=${APPLY_LZ4KD:-y}
-read -p "是否安装风驰内核驱动？(y/n，默认：y): " APPLY_SCX
-APPLY_SCX=${APPLY_SCX:-y}
+read -p "是否安装风驰内核驱动（未完成）？(y/n，默认：n): " APPLY_SCX
+APPLY_SCX=${APPLY_SCX:-n}
 echo
 echo "===== 配置信息 ====="
 echo "SoC 分支: $SOC_BRANCH"
@@ -46,7 +46,7 @@ echo ">>> 初始化仓库..."
 rm -rf kernel_workspace
 mkdir kernel_workspace
 cd kernel_workspace
-git clone --depth=1 https://github.com/cctv18/android_kernel_common_oneplus_sm8650 -b oneplus/sm8650_v_15.0.0_oneplus12 common
+git clone --depth=1 https://github.com/cctv18/android_kernel_common_oneplus_sm8650 -b oneplus/sm8650_v_15.0.0_oneplus12_6.1.118 common
 echo ">>> 初始化仓库完成"
 
 # ===== 清除 abi 文件、去除 -dirty 后缀 =====
@@ -66,7 +66,7 @@ done
 
 # ===== 拉取 SukiSU-Ultra 并设置版本号 =====
 echo ">>> 拉取 SukiSU-Ultra 并设置版本..."
-curl -LSs "https://raw.githubusercontent.com/ShirkNeko/SukiSU-Ultra/main/kernel/setup.sh" | bash -s susfs-dev
+curl -LSs "https://raw.githubusercontent.com/ShirkNeko/SukiSU-Ultra/main/kernel/setup.sh" | bash -s susfs-main
 cd KernelSU
 KSU_VERSION=$(expr $(/usr/bin/git rev-list --count main) "+" 10606)
 export KSU_VERSION=$KSU_VERSION
@@ -81,14 +81,14 @@ git clone https://github.com/ShirkNeko/SukiSU_patch.git
 # ===== 应用 SUSFS 补丁 =====
 echo ">>> 应用 SUSFS&hook 补丁..."
 cp ./susfs4ksu/kernel_patches/50_add_susfs_in_gki-android14-6.1.patch ./common/
-cp ./SukiSU_patch/hooks/new_hooks.patch ./common/
+cp ./SukiSU_patch/hooks/syscall_hooks.patch ./common/
 cp ./susfs4ksu/kernel_patches/fs/* ./common/fs/
 cp ./susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
 cd ./common
 patch -p1 < 50_add_susfs_in_gki-android14-6.1.patch || true
 cp ../SukiSU_patch/69_hide_stuff.patch ./
 patch -p1 -F 3 < 69_hide_stuff.patch
-patch -p1 < new_hooks.patch
+patch -p1 < syscall_hooks.patch
 cd ../
 
 # ===== 选择应用 LZ4KD 补丁 =====
@@ -176,7 +176,7 @@ OUT_DIR="$WORKDIR/kernel_workspace/common/out/arch/arm64/boot"
 if [[ "$USE_PATCH_LINUX" == "y" || "$USE_PATCH_LINUX" == "Y" ]]; then
   echo ">>> 使用 patch_linux 工具处理输出..."
   cd "$OUT_DIR"
-  wget https://github.com/ShirkNeko/SukiSU_KernelPatch_patch/releases/download/0.11-beta/patch_linux
+  wget https://github.com/ShirkNeko/SukiSU_KernelPatch_patch/releases/download/0.12.0/patch_linux
   chmod +x patch_linux
   ./patch_linux
   rm -f Image
@@ -203,7 +203,7 @@ cd "$WORKDIR/kernel_workspace/AnyKernel3"
 # ===== 如果启用 lz4kd，则下载 zram.zip 并放入当前目录 =====
 if [[ "$APPLY_LZ4KD" == "y" || "$APPLY_LZ4KD" == "Y" ]]; then
   echo ">>> 检测到启用了 lz4kd，准备下载 zram.zip..."
-  wget https://raw.githubusercontent.com/Suxiaoqinx/kernel_manifest_OnePlus_Sukisu_Ultra/main/zram.zip
+  wget https://raw.githubusercontent.com/cctv18/oppo_oplus_realme_sm8650/refs/heads/main/zram.zip
   echo ">>> 已下载 zram.zip 并放入打包目录"
 fi
 
