@@ -174,7 +174,7 @@ jobs:
         run: |
           git clone https://github.com/snowwolf725/GKI-LXC.git
           cd kernel_workspace/common
-          git apply ../../GKI-LXC/patchs/common-01.patch
+          # git apply ../../GKI-LXC/patchs/common-01.patch
           # cd ../msm-kernel
           # git apply ../../../GKI-LXC/patchs/msm-01.patch
       
