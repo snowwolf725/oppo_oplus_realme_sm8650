@@ -101,8 +101,7 @@ jobs:
         run: |
           rm -rf kernel_workspace && mkdir kernel_workspace && cd kernel_workspace
           echo "正在克隆源码仓库..."
-          git clone --depth=1 https://github.com/op12evox/kernel_oneplus_sm8650.git -b fifteen common
-          #git clone --depth=1 https://github.com/snowwolf725/android_kernel_common_oneplus_sm8650 -b oneplus/sm8650_v_15.0.0_oneplus12_6.1.118 common
+          git clone --depth=1 https://github.com/snowwolf725/android_kernel_common_oneplus_sm8650 -b oneplus/sm8650_v_15.0.0_oneplus12_6.1.118 common
           echo "正在去除 ABI 保护 & 去除 dirty 后缀..."
           rm common/android/abi_gki_protected_exports_* || true
           for f in common/scripts/setlocalversion; do
@@ -174,7 +173,7 @@ jobs:
         run: |
           git clone https://github.com/snowwolf725/GKI-LXC.git
           cd kernel_workspace/common
-          # git apply ../../GKI-LXC/patchs/common-01.patch
+          git apply ../../GKI-LXC/patchs/common-01.patch
           # cd ../msm-kernel
           # git apply ../../../GKI-LXC/patchs/msm-01.patch
       
