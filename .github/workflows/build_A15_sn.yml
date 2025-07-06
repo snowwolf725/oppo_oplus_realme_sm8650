@@ -197,6 +197,11 @@ jobs:
           echo "CONFIG_CGROUP_PIDS=y" >> "$CONFIG_FILE"
           echo "CONFIG_DEVMEM=y" >> "$CONFIG_FILE"
           echo "CONFIG_STRICT_DEVMEM=n" >> "$CONFIG_FILE"
+
+          echo "CONFIG_IP_VS=y" >> "$CONFIG_FILE"
+          echo "CONFIG_IP_VS_IPV6=n" >> "$CONFIG_FILE"
+          echo "CONFIG_IP_VS_PROTO_SCTP=n" >> "$CONFIG_FILE"
+          echo "CONFIG_IP_VS_FTP=n" >> "$CONFIG_FILE"
           
           echo "CONFIG_KSU=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_KPM=y" >> ./common/arch/arm64/configs/gki_defconfig
