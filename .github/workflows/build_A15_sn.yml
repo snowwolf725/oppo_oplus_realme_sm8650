@@ -182,7 +182,7 @@ jobs:
           cd kernel_workspace
           # Docker config
           CONFIG_FILE=./common/arch/arm64/configs/gki_defconfig
-          #echo "CONFIG_IP_VS=y" >> "$CONFIG_FILE"
+          echo "CONFIG_IP_VS=y" >> "$CONFIG_FILE"
           echo "CONFIG_MODULE_FORCE_LOAD=y" >> "$CONFIG_FILE"
           echo "CONFIG_PID_NS=y" >> "$CONFIG_FILE"
           echo "CONFIG_IPC_NS=y" >> "$CONFIG_FILE"
@@ -191,14 +191,13 @@ jobs:
           echo "CONFIG_BRIDGE_NETFILTER=y" >> "$CONFIG_FILE"
           echo "CONFIG_IP6_NF_TARGET_MASQUERADE=y" >> "$CONFIG_FILE"
           echo "CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=y" >> "$CONFIG_FILE"
-          # echo "CONFIG_NETFILTER_XT_MATCH_IPVS=y" >> "$CONFIG_FILE"
+          echo "CONFIG_NETFILTER_XT_MATCH_IPVS=y" >> "$CONFIG_FILE"
           echo "CONFIG_IP6_NF_NAT=y" >> "$CONFIG_FILE"
           echo "CONFIG_POSIX_MQUEUE=y" >> "$CONFIG_FILE"
           echo "CONFIG_CGROUP_PIDS=y" >> "$CONFIG_FILE"
           echo "CONFIG_DEVMEM=y" >> "$CONFIG_FILE"
           echo "CONFIG_STRICT_DEVMEM=n" >> "$CONFIG_FILE"
 
-          echo "CONFIG_IP_VS=y" >> "$CONFIG_FILE"
           echo "CONFIG_IP_VS_IPV6=n" >> "$CONFIG_FILE"
           echo "CONFIG_IP_VS_PROTO_SCTP=n" >> "$CONFIG_FILE"
           echo "CONFIG_IP_VS_FTP=n" >> "$CONFIG_FILE"
