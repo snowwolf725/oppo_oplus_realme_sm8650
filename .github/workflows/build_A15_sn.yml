@@ -206,6 +206,7 @@ jobs:
           echo "CONFIG_FHANDLE=y" >> "$CONFIG_FILE"
           echo "CONFIG_UNIX_DIAG=y" >> "$CONFIG_FILE"
           echo "CONFIG_NETLINK_DIAG=y" >> "$CONFIG_FILE"
+          echo "CONFIG_PACKET_DIAG=y" >> "$CONFIG_FILE"
           echo "CONFIG_MACVLAN=y" >> "$CONFIG_FILE"
           
           echo "CONFIG_KSU=y" >> ./common/arch/arm64/configs/gki_defconfig
