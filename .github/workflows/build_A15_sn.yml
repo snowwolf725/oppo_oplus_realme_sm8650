@@ -182,7 +182,7 @@ jobs:
           cd kernel_workspace
           # Docker config
           CONFIG_FILE=./common/arch/arm64/configs/gki_defconfig
-          echo "CONFIG_IP_VS=y" >> "$CONFIG_FILE"
+          # echo "CONFIG_IP_VS=y" >> "$CONFIG_FILE"
           echo "CONFIG_MODULE_FORCE_LOAD=y" >> "$CONFIG_FILE"
           echo "CONFIG_PID_NS=y" >> "$CONFIG_FILE"
           echo "CONFIG_IPC_NS=y" >> "$CONFIG_FILE"
