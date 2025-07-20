@@ -210,8 +210,9 @@ jobs:
           echo "CONFIG_MACVLAN=y" >> "$CONFIG_FILE"
           
           #SCX
+          echo "CONFIG_HMBIRD_SCHED=y" >> "$CONFIG_FILE"
           echo "CONFIG_SCHED_CLASS_EXT=n" >> "$CONFIG_FILE"
-          echo "CONFIG_SLIM_SCHED=y" >> "$CONFIG_FILE"
+          echo "CONFIG_SLIM_SCHED=n" >> "$CONFIG_FILE"
           
           echo "CONFIG_KSU=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_KPM=y" >> ./common/arch/arm64/configs/gki_defconfig
