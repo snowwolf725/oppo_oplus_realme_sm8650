@@ -28,7 +28,7 @@ on:
         description: '是否安装 LZ4KD 补丁'
         required: true
         type: choice
-        default: 'false'
+        default: 'true'
         options:
           - 'true'
           - 'false'
@@ -44,7 +44,7 @@ on:
         description: "是否启用bbr算法(优化上行数据,对手机日用无太大意义甚至可能负优化;false关闭,true仅加入算法,default设为默认)"
         required: true
         type: choice
-        default: 'false'
+        default: 'true'
         options:
           - 'false'
           - 'true'
@@ -53,7 +53,7 @@ on:
         description: '是否启用三星SSG IO调度器'
         required: true
         type: choice
-        default: 'false'
+        default: 'true'
         options:
           - 'true'
           - 'false'
