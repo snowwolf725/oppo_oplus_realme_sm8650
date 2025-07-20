@@ -209,6 +209,7 @@ jobs:
           echo "CONFIG_PACKET_DIAG=y" >> "$CONFIG_FILE"
           echo "CONFIG_MACVLAN=y" >> "$CONFIG_FILE"
           
+          #SCX
           echo "CONFIG_SCHED_CLASS_EXT=y" >> "$CONFIG_FILE"
           echo "CONFIG_SLIM_SCHED=y" >> "$CONFIG_FILE"
           
