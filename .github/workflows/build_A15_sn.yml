@@ -209,6 +209,9 @@ jobs:
           echo "CONFIG_PACKET_DIAG=y" >> "$CONFIG_FILE"
           echo "CONFIG_MACVLAN=y" >> "$CONFIG_FILE"
           
+          echo "CONFIG_SCHED_CLASS_EXT=y" >> "$CONFIG_FILE"
+          echo "CONFIG_SLIM_SCHED=y" >> "$CONFIG_FILE"
+          
           echo "CONFIG_KSU=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_KPM=y" >> ./common/arch/arm64/configs/gki_defconfig
           if [ "${{ github.event.inputs.hook_method }}" == "kprobes" ]; then
