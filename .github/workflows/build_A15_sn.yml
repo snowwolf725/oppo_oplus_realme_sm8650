@@ -335,6 +335,7 @@ jobs:
 
           # lxc
           echo "CONFIG_BPF_LSM=y" >> "$CONFIG_FILE"
+          echo "CONFIG_BPF_PRELOAD=y" >> "$CONFIG_FILE"
           echo "CONFIG_FUNCTION_TRACER=y" >> "$CONFIG_FILE"
           echo "CONFIG_FTRACE_SYSCALLS=n" >> "$CONFIG_FILE"
           echo "CONFIG_PSTORE_DEFLATE_COMPRESS=n" >> "$CONFIG_FILE"
