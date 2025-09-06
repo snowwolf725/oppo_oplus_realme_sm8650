@@ -317,7 +317,7 @@ jobs:
           cd kernel_workspace
           # Docker config
           CONFIG_FILE=./common/arch/arm64/configs/gki_defconfig
-          #echo "CONFIG_IP_VS=y" >> "$CONFIG_FILE"
+          echo "CONFIG_IP_VS=y" >> "$CONFIG_FILE"
           echo "CONFIG_MODULE_FORCE_LOAD=y" >> "$CONFIG_FILE"
           echo "CONFIG_PID_NS=y" >> "$CONFIG_FILE"
           echo "CONFIG_IPC_NS=y" >> "$CONFIG_FILE"
@@ -335,9 +335,9 @@ jobs:
 
           # lxc
           echo "CONFIG_BPF_LSM=y" >> "$CONFIG_FILE"
-          echo "CONFIG_BPF_PRELOAD=n" >> "$CONFIG_FILE"
+          echo "CONFIG_BPF_PRELOAD=y" >> "$CONFIG_FILE"
           echo "CONFIG_FUNCTION_TRACER=n" >> "$CONFIG_FILE"
-          echo "CONFIG_FTRACE_SYSCALLS=y" >> "$CONFIG_FILE"
+          echo "CONFIG_FTRACE_SYSCALLS=n" >> "$CONFIG_FILE"
           echo "CONFIG_PSTORE_DEFLATE_COMPRESS=n" >> "$CONFIG_FILE"
           echo "CONFIG_NF_NAT_IPV4=y" >> "$CONFIG_FILE"
           echo "CONFIG_NF_NAT_IPV6=y" >> "$CONFIG_FILE"
