@@ -331,6 +331,7 @@ jobs:
           echo "CONFIG_POSIX_MQUEUE=y" >> "$CONFIG_FILE"
           echo "CONFIG_CGROUP_PIDS=y" >> "$CONFIG_FILE"
           echo "CONFIG_DEVMEM=y" >> "$CONFIG_FILE"
+          echo "CONFIG_IP6_NF_NAT=y" >> "$CONFIG_FILE"
           echo "CONFIG_STRICT_DEVMEM=n" >> "$CONFIG_FILE"
 
           # lxc
