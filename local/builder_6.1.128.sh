@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
 # ===== 设置自定义参数 =====
-echo "===== 欧加真MT6989通用6.1.115 A15 (天玑特供)OKI内核本地编译脚本 By Coolapk@cctv18 ====="
+echo "===== 欧加真MT6897通用6.1.128 A15 (天玑特供)OKI内核本地编译脚本 By Coolapk@cctv18 ====="
 echo ">>> 读取用户配置..."
 MANIFEST=${MANIFEST:-oppo+oplus+realme}
 read -p "请输入自定义内核后缀（默认：android14-11-o-gca13bffobf09）: " CUSTOM_SUFFIX
@@ -73,7 +73,7 @@ echo ">>> 初始化仓库..."
 rm -rf kernel_workspace
 mkdir kernel_workspace
 cd kernel_workspace
-git clone --depth=1 https://github.com/cctv18/android_kernel_oneplus_mt6989 -b oneplus/mt6989_v_15.0.2_ace5_race common
+git clone --depth=1 https://github.com/cctv18/android_kernel_oneplus_mt6897 -b oneplus/mt6897_v_15.0.0_oneplus_pad common
 echo ">>> 初始化仓库完成"
 
 # ===== 清除 abi 文件、去除 -dirty 后缀 =====
@@ -126,6 +126,8 @@ if [[ "$KSU_BRANCH" == "y" ]]; then
   cp ./susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
   cd ./common
   patch -p1 < 50_add_susfs_in_gki-android14-6.1.patch || true
+  #临时修复task_mmu.c在部分内核版本补丁后找不到show_pad方法的问题
+  sed -i 's/goto show_pad;/return 0;/g' ./fs/proc/task_mmu.c
   if [[ "$APPLY_HOOKS" == "m" || "$APPLY_HOOKS" == "M" ]]; then
     patch -p1 < scope_min_manual_hooks_v1.6.patch || true
   fi
@@ -148,6 +150,8 @@ else
   cp ./kernel_patches/69_hide_stuff.patch ./common/
   cd ./common
   patch -p1 < 50_add_susfs_in_gki-android14-6.1.patch || true
+  #临时修复task_mmu.c在部分内核版本补丁后找不到show_pad方法的问题
+  sed -i 's/goto show_pad;/return 0;/g' ./fs/proc/task_mmu.c
   if [[ "$APPLY_HOOKS" == "m" || "$APPLY_HOOKS" == "M" ]]; then
     patch -p1 -N -F 3 < scope_min_manual_hooks_v1.5.patch || true
   fi
